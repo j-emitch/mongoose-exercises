@@ -6,9 +6,11 @@ const bookSchema = new Schema({
   title: String,
   author: String,
   pages: Number,
-  genres: {Array, default: []},
+  genres: [String],
   rating: Number,
 });
 
 const Book = mongoose.model("Book", bookSchema);
+
+module.exports = Book;
 
