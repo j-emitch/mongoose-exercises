@@ -181,10 +181,50 @@ Book.find({ genres: 'Fiction' })
 ----------------------*/
 //1. Find all the people who are tall (>180) AND rich (>30000)
 
+Person.find({ height: { $gt: 180 }, salary: { $gt: 30000 } })
+	.then((people) => {
+		console.log(people);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
+
 //2. Find all the people who are tall (>180) OR rich (>30000)
+
+Person.find({ $or: [{ height: { $gt: 180 } }, { salary: { $gt: 30000 } }] })
+	.then((people) => {
+		console.log(people);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 //3. Find all the people who have grey hair or eyes, and who's weight (<70)
 
+Person.find({ $or: [{ hair: 'grey' }, { eyes: 'grey' }], weight: { $lt: 70 } })
+	.then((people) => {
+		console.log(people);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
+
 //4. Find people who have at least 1 kid with grey hair
 
+Person.find({ 'kids.hair': 'grey' })
+	.then((people) => {
+		console.log(people);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
+
 //5. Find all the people who have at least one kid who's weight is >100 and themselves' weight is >100
+
+Person.find({ $and: [{ 'kids.weight': { $gt: 100 } }, { weight: { $gt: 100 } }] })
+	.then((people) => {
+		console.log(people);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
