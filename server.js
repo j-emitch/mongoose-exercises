@@ -147,10 +147,35 @@ and your server is running do the following:
 /*Books
 ----------------------*/
 //1. Find books with fewer than 500 but more than 200 pages
+Book.find({ pages: { $lt: 500, $gt: 200 } })
+	.then((books) => {
+		console.log(books);
+	})
+	.catch((err) => {
+		console.error(err);
+	});	
 
 //2. Find books whose rating is less than 5, and sort by the author's name
+Book.find({ rating: { $lt: 5 } })
+	.sort({ author: 1 })
+	.then((books) => {
+		console.log(books);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 //3. Find all the Fiction books, skip the first 2, and display only 3 of them
+
+Book.find({ genres: 'Fiction' })
+	.skip(2)
+	.limit(3)
+	.then((books) => {
+		console.log(books);
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 /*People
 ----------------------*/
